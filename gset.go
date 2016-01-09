@@ -10,32 +10,42 @@ type Elementer interface {
 	Element() interface{}
 }
 
+type ElementerFunc func() interface{}
+
+func (e ElementerFunc) Element() interface{} {
+	return e()
+}
+
+func Elementerlize(val interface{}) ElementerFunc {
+	return ElementerFunc(func() interface{} { return val })
+}
+
 type Set struct {
-	elements map[Elementer]bool
+	elements map[interface{}]bool
 }
 
 func NewSet(elements ...Elementer) *Set {
-	set := &Set{make(map[Elementer]bool)}
+	set := &Set{make(map[interface{}]bool)}
 	set.Add(elements...)
 	return set
 }
 
-func (s *Set) Length() int {
+func (set *Set) Length() int {
 	mux.RLock()
 	defer mux.RUnlock()
-	return len(s.elements)
+	return len(set.elements)
 }
 
-func (s *Set) Clear() {
+func (set *Set) Clear() {
 	mux.Lock()
-	s.elements = make(map[Elementer]bool)
+	set.elements = make(map[interface{}]bool)
 	mux.Unlock()
 }
 
 func (set *Set) Add(elements ...Elementer) *Set {
 	mux.Lock()
 	for _, element := range elements {
-		set.elements[element] = true
+		set.elements[element.Element()] = true
 	}
 	mux.Unlock()
 	return set
@@ -44,7 +54,7 @@ func (set *Set) Add(elements ...Elementer) *Set {
 func (set *Set) Remove(elements ...Elementer) *Set {
 	mux.Lock()
 	for _, element := range elements {
-		delete(set.elements, element)
+		delete(set.elements, element.Element())
 	}
 	mux.Unlock()
 	return set
@@ -52,13 +62,13 @@ func (set *Set) Remove(elements ...Elementer) *Set {
 
 func (set *Set) Has(element Elementer) bool {
 	mux.RLock()
-	_, has := set.elements[element]
+	_, has := set.elements[element.Element()]
 	mux.RUnlock()
 	return has
 }
 
-func (set *Set) ToSlice() []Elementer {
-	elements := []Elementer{}
+func (set *Set) ToSlice() []interface{} {
+	elements := []interface{}{}
 	mux.RLock()
 	for element := range set.elements {
 		elements = append(elements, element)
