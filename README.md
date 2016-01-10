@@ -6,7 +6,7 @@ Set data structure in Golang
 
 #### Elementer interface
 
-`gset` can receive element which has implemented Elmementer interface.
+`gset` can receive elements implemented Elementer interface.
 
 ```go
   type Elementer interface {
@@ -18,7 +18,9 @@ And Here is an simple way to wrap a value to a Elementer
 
 
 ```go
-  Elementerlize(1)
+  Elementerlize(1) // return a object with Element() function
+
+  Elementerslize(1, 2, 3) // return a array of Elementer objects
 ```
 
 #### API

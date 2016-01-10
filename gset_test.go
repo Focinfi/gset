@@ -76,8 +76,9 @@ func TestElementerlize(t *testing.T) {
 }
 
 func TestElementerslize(t *testing.T) {
-	es := Elementerslize(1, 2, 3)
-	if len(es) != 3 {
+	set.Clear()
+	set.Add(Elementerslize(1, 2, 3)...)
+	if set.Length() != 3 {
 		t.Error("can not Elementerslize")
 	}
 }
