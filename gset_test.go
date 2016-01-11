@@ -67,18 +67,10 @@ func TestHas(t *testing.T) {
 	}
 }
 
-func TestElementerlize(t *testing.T) {
+func TestT(t *testing.T) {
 	set.Clear()
-	set.Add(Elementerlize(1))
+	set.Add(T(1))
 	if set.Length() != 1 {
 		t.Error("can not return a elementer")
-	}
-}
-
-func TestElementerslize(t *testing.T) {
-	set.Clear()
-	set.Add(Elementerslize(1, 2, 3)...)
-	if set.Length() != 3 {
-		t.Error("can not Elementerslize")
 	}
 }

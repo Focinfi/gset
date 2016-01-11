@@ -16,16 +16,8 @@ func (e ElementerFunc) Element() interface{} {
 	return e()
 }
 
-func Elementerlize(val interface{}) ElementerFunc {
+func T(val interface{}) ElementerFunc {
 	return ElementerFunc(func() interface{} { return val })
-}
-
-func Elementerslize(elementers ...interface{}) []Elementer {
-	elementersArr := make([]Elementer, len(elementers))
-	for i, elementer := range elementers {
-		elementersArr[i] = Elementerlize(elementer)
-	}
-	return elementersArr
 }
 
 type Set struct {
