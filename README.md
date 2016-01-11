@@ -18,9 +18,8 @@ And Here is an simple way to wrap a value to a Elementer
 
 
 ```go
-  Elementerlize(1) // return a object with Element() function
+  gset.T(1) // return a object with Element() function
 
-  Elementerslize(1, 2, 3) // return a array of Elementer objects
 ```
 
 #### API
