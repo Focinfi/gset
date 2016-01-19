@@ -22,14 +22,40 @@ And Here is an simple way to wrap a value to a Elementer
 
 ```
 
-#### API
+#### Usage
+----
+
+##### New
+
+Create a normal Set
+```go
+set := gset.NewSet(gset.T(1), gset.T("hello"))
+```
+
+Create a thread-safe Set
+```go 
+set := gset.NewSetThreadSafe(gset.T(1), gset.T("hello")) 
+```
+
+##### Manipulation
 
 ```go
-  func NewSet(elements ...Elementer) *Set
-  func (set *Set) Add(elements ...Elementer) *Set
-  func (s *Set) Clear()
-  func (set *Set) Has(element Elementer) bool
-  func (s *Set) Length() int
-  func (set *Set) Remove(elements ...Elementer) *Set
-  func (set *Set) ToSlice() []Elementer
+  // add 1
+  set.Add(gset.T(1))
+
+  // length
+  set.Length() // still 2
+
+  // clear
+  set.Clear()
+
+  // chekc if set has 1
+  set.Has(gset.T(1)) // true
+
+  // remove 1 from set
+  set.Remove(gset.T(1))
+  set.Has(gset.T(1)) // false
+
+  // get a array contains evey element in set
+  elements := set.ToSlice() // []interface{}{"hello"}
 ```

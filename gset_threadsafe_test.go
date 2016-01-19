@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-var setThreadSafe = SetThreadSafe{Set: &Set{make(map[interface{}]bool)}}
+var setThreadSafe = SetThreadSafe{Set: &Set{make(map[interface{}]Elementer)}}
 
 func TestThreadSafeLength(t *testing.T) {
 	setThreadSafe.Add(v, v, v1)
@@ -46,5 +46,12 @@ func TestThreadSafeHas(t *testing.T) {
 	setThreadSafe := NewSet(v)
 	if !setThreadSafe.Has(v) {
 		t.Error("can not detect a element")
+	}
+}
+
+func TestThreadSafeToSlice(t *testing.T) {
+	elements := NewSetThreadSafe(v).ToSlice()
+	if elements[0] != v {
+		t.Errorf("can not to slice, the first element is: %v", elements[0])
 	}
 }

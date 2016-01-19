@@ -21,12 +21,12 @@ func T(val interface{}) ElementerFunc {
 }
 
 type Set struct {
-	elements map[interface{}]bool
+	elements map[interface{}]Elementer
 }
 
 // NewSet create new Set with uncertain number of Elementers and return its pointer
 func NewSet(elements ...Elementer) *Set {
-	set := &Set{make(map[interface{}]bool)}
+	set := &Set{make(map[interface{}]Elementer)}
 	set.Add(elements...)
 	return set
 }
@@ -38,13 +38,13 @@ func (set *Set) Length() int {
 
 // Clear reset the set to be empty container
 func (set *Set) Clear() {
-	set.elements = make(map[interface{}]bool)
+	set.elements = make(map[interface{}]Elementer)
 }
 
 // Add add uncertain number of Elementers and return this set's pointer
 func (set *Set) Add(elements ...Elementer) *Set {
 	for _, element := range elements {
-		set.elements[element.Element()] = true
+		set.elements[element.Element()] = element
 	}
 	return set
 }
@@ -66,8 +66,8 @@ func (set *Set) Has(element Elementer) bool {
 // ToSlice return a new []interface{} containing the elements in this set
 func (set *Set) ToSlice() []interface{} {
 	elements := []interface{}{}
-	for element := range set.elements {
-		elements = append(elements, element)
+	for elementKey := range set.elements {
+		elements = append(elements, set.elements[elementKey])
 	}
 	return elements
 }

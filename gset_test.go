@@ -22,7 +22,7 @@ func (c Count) Element() interface{} {
 
 var v = &Value{1}
 var v1 = &Count{"1"}
-var set = Set{make(map[interface{}]bool)}
+var set = Set{make(map[interface{}]Elementer)}
 
 func TestLength(t *testing.T) {
 	set.Add(v, v, v1)
@@ -72,5 +72,12 @@ func TestT(t *testing.T) {
 	set.Add(T(1))
 	if set.Length() != 1 {
 		t.Error("can not return a elementer")
+	}
+}
+
+func TestToSlice(t *testing.T) {
+	elements := NewSet(v).ToSlice()
+	if elements[0] != v {
+		t.Errorf("can not to slice, the first element is: %v", elements[0])
 	}
 }
