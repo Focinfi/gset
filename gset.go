@@ -63,6 +63,12 @@ func (set *Set) Has(element Elementer) bool {
 	return has
 }
 
+// Get
+func (s *Set) Get(key interface{}) (Elementer, bool) {
+	elementer, ok := s.elements[key]
+	return elementer, ok
+}
+
 // ToSlice return a new []interface{} containing the elements in this set
 func (set *Set) ToSlice() []interface{} {
 	elements := []interface{}{}

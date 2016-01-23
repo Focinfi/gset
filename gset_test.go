@@ -67,6 +67,14 @@ func TestHas(t *testing.T) {
 	}
 }
 
+func TestGet(t *testing.T) {
+	set := NewSet(v)
+	value, ok := set.Get(v.Element())
+	if !ok || value != v {
+		t.Error("can get a element")
+	}
+}
+
 func TestT(t *testing.T) {
 	set.Clear()
 	set.Add(T(1))
