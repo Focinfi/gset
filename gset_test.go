@@ -24,16 +24,16 @@ var v = &Value{1}
 var v1 = &Count{"1"}
 var set = Set{make(map[interface{}]Elementer)}
 
-func TestLength(t *testing.T) {
+func TestLen(t *testing.T) {
 	set.Add(v, v, v1)
-	if set.Length() != 2 {
+	if set.Len() != 2 {
 		t.Error("Can distinguish same elements")
 	}
 }
 
 func TestClear(t *testing.T) {
 	set.Clear()
-	if set.Length() != 0 {
+	if set.Len() != 0 {
 		t.Error("can not clear the set")
 	}
 }
@@ -78,7 +78,7 @@ func TestGet(t *testing.T) {
 func TestT(t *testing.T) {
 	set.Clear()
 	set.Add(T(1))
-	if set.Length() != 1 {
+	if set.Len() != 1 {
 		t.Error("can not return a elementer")
 	}
 }

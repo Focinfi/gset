@@ -6,16 +6,16 @@ import (
 
 var setThreadSafe = SetThreadSafe{Set: &Set{make(map[interface{}]Elementer)}}
 
-func TestThreadSafeLength(t *testing.T) {
+func TestThreadSafeLen(t *testing.T) {
 	setThreadSafe.Add(v, v, v1)
-	if setThreadSafe.Length() != 2 {
+	if setThreadSafe.Len() != 2 {
 		t.Error("Can distinguish same elements")
 	}
 }
 
 func TestThreadSafeClear(t *testing.T) {
 	setThreadSafe.Clear()
-	if setThreadSafe.Length() != 0 {
+	if setThreadSafe.Len() != 0 {
 		t.Error("can not clear the setThreadSafe")
 	}
 }
@@ -46,6 +46,14 @@ func TestThreadSafeHas(t *testing.T) {
 	setThreadSafe := NewSet(v)
 	if !setThreadSafe.Has(v) {
 		t.Error("can not detect a element")
+	}
+}
+
+func TestThreadSafeGet(t *testing.T) {
+	set := NewSet(v)
+	value, ok := set.Get(v.Element())
+	if !ok || value != v {
+		t.Error("can get a element")
 	}
 }
 

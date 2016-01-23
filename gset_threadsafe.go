@@ -15,10 +15,10 @@ func NewSetThreadSafe(elements ...Elementer) *SetThreadSafe {
 	return &SetThreadSafe{Set: NewSet(elements...)}
 }
 
-func (set *SetThreadSafe) Length() int {
+func (set *SetThreadSafe) Len() int {
 	set.RLock()
 	defer set.RUnlock()
-	return set.Set.Length()
+	return set.Set.Len()
 }
 
 func (set *SetThreadSafe) Clear() {
@@ -43,6 +43,12 @@ func (set *SetThreadSafe) Has(element Elementer) bool {
 	set.RLock()
 	defer set.RUnlock()
 	return set.Set.Has(element)
+}
+
+func (set *SetThreadSafe) Get(key interface{}) (Elementer, bool) {
+	set.RLock()
+	defer set.Unlock()
+	return set.Set.Get(key)
 }
 
 func (set *SetThreadSafe) ToSlice() []interface{} {

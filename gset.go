@@ -32,7 +32,7 @@ func NewSet(elements ...Elementer) *Set {
 }
 
 // Length return this set's length
-func (set *Set) Length() int {
+func (set *Set) Len() int {
 	return len(set.elements)
 }
 
