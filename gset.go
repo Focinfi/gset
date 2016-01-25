@@ -64,7 +64,7 @@ func (set *Set) Has(element Elementer) bool {
 }
 
 // Get
-func (s *Set) Get(key interface{}) (Elementer, bool) {
+func (s *Set) Get(key interface{}) (interface{}, bool) {
 	elementer, ok := s.elements[key]
 	return elementer, ok
 }
@@ -76,4 +76,8 @@ func (set *Set) ToSlice() []interface{} {
 		elements = append(elements, set.elements[elementKey])
 	}
 	return elements
+}
+
+func (s *Set) ToMap() map[interface{}]Elementer {
+	return s.elements
 }

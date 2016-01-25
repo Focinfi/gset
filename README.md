@@ -52,6 +52,9 @@ set := gset.NewSetThreadSafe(gset.T(1), gset.T("hello"))
   // chekc if set has 1
   set.Has(gset.T(1)) // true
 
+  // get 1
+  value, ok := set.Get(1) // value is gset.T(1), ok is true
+
   // remove 1 from set
   set.Remove(gset.T(1))
   set.Has(gset.T(1)) // false

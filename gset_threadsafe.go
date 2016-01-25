@@ -45,7 +45,7 @@ func (set *SetThreadSafe) Has(element Elementer) bool {
 	return set.Set.Has(element)
 }
 
-func (set *SetThreadSafe) Get(key interface{}) (Elementer, bool) {
+func (set *SetThreadSafe) Get(key interface{}) (interface{}, bool) {
 	set.RLock()
 	defer set.Unlock()
 	return set.Set.Get(key)
