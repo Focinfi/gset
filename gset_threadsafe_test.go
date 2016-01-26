@@ -36,21 +36,21 @@ func TestThreadSafeRemove(t *testing.T) {
 }
 
 func TestThreadSafeNewSet(t *testing.T) {
-	setThreadSafe := NewSet(v)
+	setThreadSafe := NewSetThreadSafe(v)
 	if setThreadSafe == nil {
 		t.Error("can not new a setThreadSafe")
 	}
 }
 
 func TestThreadSafeHas(t *testing.T) {
-	setThreadSafe := NewSet(v)
+	setThreadSafe := NewSetThreadSafe(v)
 	if !setThreadSafe.Has(v) {
 		t.Error("can not detect a element")
 	}
 }
 
 func TestThreadSafeGet(t *testing.T) {
-	set := NewSet(v)
+	set := NewSetThreadSafe(v)
 	value, ok := set.Get(v.Element())
 	if !ok || value != v {
 		t.Error("can get a element")
