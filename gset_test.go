@@ -8,7 +8,7 @@ type Value struct {
 	val int
 }
 
-func (v Value) Element() interface{} {
+func (v Value) Id() interface{} {
 	return v.val
 }
 
@@ -16,13 +16,13 @@ type Count struct {
 	cout string
 }
 
-func (c Count) Element() interface{} {
+func (c Count) Id() interface{} {
 	return c.cout
 }
 
 var v = &Value{1}
 var v1 = &Count{"1"}
-var set = Set{make(map[interface{}]Elementer)}
+var set = Set{make(map[interface{}]IdGetter)}
 
 func TestLen(t *testing.T) {
 	set.Add(v, v, v1)
@@ -69,7 +69,7 @@ func TestHas(t *testing.T) {
 
 func TestGet(t *testing.T) {
 	set := NewSet(v)
-	value, ok := set.Get(v.Element())
+	value, ok := set.Get(v.Id())
 	if !ok || value != v {
 		t.Error("can get a element")
 	}
@@ -79,7 +79,7 @@ func TestT(t *testing.T) {
 	set.Clear()
 	set.Add(T(1))
 	if set.Len() != 1 {
-		t.Error("can not return a elementer")
+		t.Error("can not return a KeyGeter")
 	}
 }
 

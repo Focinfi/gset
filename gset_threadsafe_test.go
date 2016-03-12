@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-var setThreadSafe = SetThreadSafe{Set: &Set{make(map[interface{}]Elementer)}}
+var setThreadSafe = SetThreadSafe{Set: &Set{make(map[interface{}]IdGetter)}}
 
 func TestThreadSafeLen(t *testing.T) {
 	setThreadSafe.Add(v, v, v1)
@@ -51,7 +51,7 @@ func TestThreadSafeHas(t *testing.T) {
 
 func TestThreadSafeGet(t *testing.T) {
 	set := NewSetThreadSafe(v)
-	value, ok := set.Get(v.Element())
+	value, ok := set.Get(v.Id())
 	if !ok || value != v {
 		t.Error("can get a element")
 	}

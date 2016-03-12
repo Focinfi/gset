@@ -4,21 +4,21 @@ Set data structure in Golang
 
 `go get github.com/Focinfi/gset`
 
-#### Elementer interface
+#### IdGetter interface
 
-`gset` can receive elements implemented Elementer interface.
+`gset` can receive elements implemented IdGetter interface.
 
 ```go
-  type Elementer interface {
-    Element() interface{}
+  type IdGetter interface {
+    Id() interface{}
   }
 ```
 
-And Here is an simple way to wrap a value to a Elementer
+And Here is an simple way to wrap a value to a IdGetter
 
 
 ```go
-  gset.T(1) // return a object with Element() function
+  gset.T(1) // return a object with Id() function
 
 ```
 

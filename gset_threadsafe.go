@@ -11,7 +11,7 @@ type SetThreadSafe struct {
 	*Set
 }
 
-func NewSetThreadSafe(elements ...Elementer) *SetThreadSafe {
+func NewSetThreadSafe(elements ...IdGetter) *SetThreadSafe {
 	return &SetThreadSafe{Set: NewSet(elements...)}
 }
 
@@ -27,19 +27,19 @@ func (set *SetThreadSafe) Clear() {
 	set.Unlock()
 }
 
-func (set *SetThreadSafe) Add(elements ...Elementer) *Set {
+func (set *SetThreadSafe) Add(elements ...IdGetter) *Set {
 	set.Lock()
 	defer set.Unlock()
 	return set.Set.Add(elements...)
 }
 
-func (set *SetThreadSafe) Remove(elements ...Elementer) *Set {
+func (set *SetThreadSafe) Remove(elements ...IdGetter) *Set {
 	set.Lock()
 	defer set.Unlock()
 	return set.Set.Remove(elements...)
 }
 
-func (set *SetThreadSafe) Has(element Elementer) bool {
+func (set *SetThreadSafe) Has(element IdGetter) bool {
 	set.RLock()
 	defer set.RUnlock()
 	return set.Set.Has(element)
